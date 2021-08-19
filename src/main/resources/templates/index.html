@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple To-Do List</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mb-4">
+<div class="row">
+    <div class="col-md-12">
+        <div class="main-todo-input-wrap">
+            <div class="main-todo-input fl-wrap">
+
+                <form th:action="@{'/todo/add-todo'}" th:method="POST">
+                    <div class="main-todo-input-item">
+                        <label>
+                            <input type="text" name="todoTitle" placeholder="What will you do today?"/>
+                        </label>
+                    </div>
+                    <button type="submit" class="add-items main-search-button">ADD</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container mb-4">
+<div class="row">
+    <div class="col-12">
+        <ul th:each="todo : ${todoList}" class="list-group">
+        <li class="list-group-item list-group-item-warning" th:text="${todo.title}"></li>
+            <form th:action="@{'/todo/delete/{id}' (id=${todo.getId()})}"
+                  th:method="Post">
+                <button type="submit"
+                        class="btn btn-sm btn-danger delete-product">
+                    <i class="fa fa-trash">Task is done!</i>
+                </button>
+            </form>
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>
